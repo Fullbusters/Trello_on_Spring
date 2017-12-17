@@ -87,7 +87,8 @@ public class MainController {
         short enable=1;
         user.setEnabled(enable);
         appUserService.save(user);
-        model.addAttribute("message","Registration successful");
+        model.addAttribute("check","anonim");
+        model.addAttribute("message","Registration succesful");
         return "main";
     }
 
