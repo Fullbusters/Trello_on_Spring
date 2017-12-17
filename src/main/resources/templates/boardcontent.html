@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <link href="/css/bootstrap.min.css" rel="stylesheet"/>
+    <link  rel="stylesheet" type="text/css" th:href="@{/css/myStyle.css}"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <title> Trello  </title>
+</head>
+<body>
+
+
+<th:block th:include="menuforUser"></th:block>
+
+<br/>
+
+            <p>Тут має бути вміст дошки</p>
+            <div th:each="board : ${board}">
+            <!--<h3 th:text="${board.id}"/>-->
+            <p th:text="${board.name}"/>
+            </div>
+</body>
+</html>

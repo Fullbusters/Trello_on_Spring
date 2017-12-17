@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <link href="/css/bootstrap.min.css" rel="stylesheet"/>
+    <link  rel="stylesheet" type="text/css" th:href="@{/css/myStyle.css}"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <title> Trello  </title>
+</head>
+<body>
+
+<div th:if="${check}=='anonim'">
+    <th:block th:include="/menuforGuest"></th:block>
+</div>
+
+<div th:if="${check}=='userloginned'">
+    <th:block th:include="/menuforUser"></th:block>
+</div>
+
+<br/>
+<div class="container-fluid text-center">
+
+            <div th:if="${check}=='anonim'"  class="row content" >
+                <div class="col-sm-8 text-left">
+                    <div>
+                        <div class="well">
+                             <div class="panel-body">
+                                 <h1>Добро пожаловать</h1>
+                                <p>
+                                <p th:text="${message}"></p>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div th:if="${check}=='userloginned'"  class="row">
+                <div th:each="board : ${board}" class="col-md-3">
+                    <p>
+                         <a th:href="@{/board/view(id=${board.id})}" type="button"   class="btn btn-primary btn-lg board" > <p th:text="${board.name}"/></a>
+                    </p>
+                </div>
+                    <div class="col-md-3">
+                        <p>
+                            <a th:href="@{/board}" type="button"   class="btn btn-primary btn-lg board" > <p>Створити дошку</p></a>
+                        </p>
+                    </div>
+            </div>
+
+</div>
+</body>
+</html>
