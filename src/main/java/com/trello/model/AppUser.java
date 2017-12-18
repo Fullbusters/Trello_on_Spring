@@ -3,18 +3,19 @@ package com.trello.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "app_user")
+@Table(name = "App_User")
 public class AppUser {
 
     @Id
     @GeneratedValue
+    @Column(name = "User_Id")
     private Long userId;
-    @Column
+    @Column(name = "User_Name")
     private String userName;
-    @Column
-    private String encrytedPassword;
-    @Column
-    private short enabled;
+    @Column(name = "Encrypted_Password")
+    private String encryptedPassword;
+    @Column(name = "Enabled")
+    private Short enabled;
 
     public AppUser() {
 
@@ -23,7 +24,7 @@ public class AppUser {
     public AppUser(Long userId, String userName, String encrytedPassword) {
         this.userId = userId;
         this.userName = userName;
-        this.encrytedPassword = encrytedPassword;
+        this.encryptedPassword = encrytedPassword;
     }
 
     public Long getUserId() {
@@ -43,23 +44,23 @@ public class AppUser {
     }
 
     public String getEncrytedPassword() {
-        return encrytedPassword;
+        return encryptedPassword;
     }
 
     public void setEncrytedPassword(String encrytedPassword) {
-        this.encrytedPassword = encrytedPassword;
+        this.encryptedPassword = encrytedPassword;
     }
 
-    public short getEnabled() {
+    public Short getEnabled() {
         return enabled;
     }
 
-    public void setEnabled(short enabled) {
+    public void setEnabled(Short enabled) {
         this.enabled = enabled;
     }
 
     @Override
     public String toString() {
-        return this.userName + "/" + this.encrytedPassword;
+        return this.userName + "/" + this.encryptedPassword;
     }
 }

@@ -1,32 +1,32 @@
 package com.trello.model;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 @Entity
-@Table(name = "board")
-public class Board implements Serializable, Comparable<Board>{
+@Table(name = "Board")
+public class Board implements Comparable<Board> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
-    @Column
+    @Column(name = "Id")
+    private Long id;
+    @Column(name = "Name")
     private String name;
-    @Column
-    private int creator_id;
-    @Column
-    private long creatorTimestamp;
+    @Column(name = "Creator_Id")
+    private Long creatorId;
+    @Column(name = "Creator_Timestamp")
+    private Long creatorTimestamp;
 
     public Board() {
-        this.creatorTimestamp=System.currentTimeMillis();
+        this.creatorTimestamp = System.currentTimeMillis();
     }
 
     @Override
-    public int compareTo(Board that){
+    public int compareTo(Board that) {
         return Long.compare(this.creatorTimestamp, that.creatorTimestamp);
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -38,11 +38,11 @@ public class Board implements Serializable, Comparable<Board>{
         this.name = name;
     }
 
-    public long getCreator_id() {
-        return creator_id;
+    public Long getCreatorId() {
+        return creatorId;
     }
 
-    public void setCreator_id(int creator_id) {
-        this.creator_id = creator_id;
+    public void setCreatorId(Long creatorId) {
+        this.creatorId = creatorId;
     }
 }

@@ -8,16 +8,15 @@ import java.sql.SQLException;
 
 public class UserMapper implements RowMapper<AppUser> {
 
-    public static final String BASE_SQL//
-    ="Select u.User_Id, u.User_Name, u.Encryted_Password From App_User u ";
+    public static final String BASE_SQL = "Select u.User_Id, u.User_Name, u.Encrypted_Password From App_User u ";
 
     @Override
     public AppUser mapRow(ResultSet rs, int rowNum) throws SQLException{
         Long userId = rs.getLong("User_Id");
         String userName = rs.getString("User_Name");
-        String encrytedPassword = rs.getString("Encryted_Password");
+        String encryptedPassword = rs.getString("Encrypted_Password");
 
-        return new AppUser(userId, userName, encrytedPassword);
+        return new AppUser(userId, userName, encryptedPassword);
     }
 
 }
