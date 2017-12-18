@@ -21,7 +21,7 @@ public class BoardService {
         repository.save(board);
     }
 
-    public Board findOne(int id ){Board board=repository.findOne(id);
+    public Board findOne(Long id){Board board=repository.findOne(id);
             return board;
     }
     public List<Board> getAll(){

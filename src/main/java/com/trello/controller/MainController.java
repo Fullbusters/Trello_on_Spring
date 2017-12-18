@@ -34,69 +34,63 @@ public class MainController {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public String mainPage(Model model){
-            String username=getCurrentUsername();
-            if (username=="anonymousUser"){
-                model.addAttribute("check","anonim");
-                model.addAttribute("message","hello");
-            }else{
-                model.addAttribute("check","userloginned");
-                model.addAttribute("message","hello  "+username);
-            }
-
+    public String mainPage(Model model) {
+        String username = getCurrentUsername();
+        if ("anonymousUser".equalsIgnoreCase(username)) {
+            model.addAttribute("check", "anonim");
+            model.addAttribute("message", "hello");
+        } else {
+            model.addAttribute("check", "userloginned");
+            model.addAttribute("message", "hello  " + username);
+        }
 
         model.addAttribute("board", boardService.getAll());
         return "main";
 
     }
 
-    @RequestMapping(value="/board")
-    public String boardPage(Model model,Principal principal)
-    {
-        User loginedUser = (User) ((Authentication)principal).getPrincipal();
+    @RequestMapping(value = "/board")
+    public String boardPage(Model model, Principal principal) {
+        User loginedUser = (User) ((Authentication) principal).getPrincipal();
         //TODO create board with creator_id
-        model.addAttribute("board",new Board());
+        model.addAttribute("board", new Board());
         return "board";
     }
 
 
-    @RequestMapping(value="/board/view")
-    public String boardcontentPage(Model model,@RequestParam int id)
-    {
+    @RequestMapping(value = "/board/view")
+    public String boardcontentPage(Model model, @RequestParam Long id) {
         model.addAttribute("board", boardService.findOne(id));
         return "boardcontent";
     }
 
-    @RequestMapping(value = "/board/submit",method = RequestMethod.POST)
-    public String submitBoard(@ModelAttribute Board board){
+    @RequestMapping(value = "/board/submit", method = RequestMethod.POST)
+    public String submitBoard(@ModelAttribute Board board) {
         boardService.save(board);
         return "redirect:/";
     }
 
 
     @RequestMapping(value = "/reg")
-    public String reg(Model model){
+    public String reg(Model model) {
         model.addAttribute("user", new AppUser());
         return "reg";
     }
 
-    @RequestMapping(value = "/reg/submit",method = RequestMethod.POST)
-    public String submitUser(Model model,@ModelAttribute AppUser user){
-        String encrytedPassword=encrytePassword(user.getEncrytedPassword());
+    @RequestMapping(value = "/reg/submit", method = RequestMethod.POST)
+    public String submitUser(Model model, @ModelAttribute AppUser user) {
+        String encrytedPassword = encrytePassword(user.getEncrytedPassword());
         user.setEncrytedPassword(encrytedPassword);
-        short enable=1;
+        short enable = 1;
         user.setEnabled(enable);
         appUserService.save(user);
-        model.addAttribute("check","anonim");
-        model.addAttribute("message","Registration succesful");
+        model.addAttribute("check", "anonim");
+        model.addAttribute("message", "Registration successful");
         return "main";
     }
 
-
-    @RequestMapping(value="/login")
-    public String loginPage(){
+    @RequestMapping(value = "/login")
+    public String loginPage() {
         return "login";
     }
-
-
 }
